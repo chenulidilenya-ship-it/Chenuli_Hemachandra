@@ -401,7 +401,7 @@ section {
 }
 
 /* ==========================================
-   PROJECTS SECTION - ALL 6 CARDS IDENTICAL
+   PROJECTS SECTION - ALL CARDS IDENTICAL
    ========================================== */
 .projects {
   display: grid;
@@ -409,10 +409,10 @@ section {
   gap: 35px;
 }
 
-/* ALL project cards get the SAME styling */
+/* ALL project cards get EXACTLY the SAME styling */
 .project-card {
   padding: 0;
-  min-height: var(--card-min-height);
+  min-height: 380px; /* FIXED height for ALL cards */
   display: flex;
   flex-direction: column;
   background: var(--color-bg-light);
@@ -462,9 +462,10 @@ section {
   font-size: 24px;
   font-weight: 600;
   flex-shrink: 0;
-  min-height: 60px;
+  min-height: 60px; /* FIXED height for title */
   display: flex;
   align-items: center;
+  line-height: 1.3;
 }
 
 .project-content p {
@@ -473,6 +474,11 @@ section {
   margin-bottom: 25px;
   flex: 1;
   font-size: 15px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* LIMIT text to 3 lines for consistency */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Link at bottom of card - SAME for all */
@@ -488,6 +494,7 @@ section {
   padding-top: 15px;
   border-top: 1px solid rgba(139, 94, 60, 0.1);
   font-size: 15px;
+  flex-shrink: 0; /* Prevent link from shrinking */
 }
 
 .project-content a::after {
