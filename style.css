@@ -20,6 +20,8 @@
   --gradient-primary: linear-gradient(to right, #8b5e3c, #b07a50);
   --gradient-hero: radial-gradient(circle at top left, rgba(139, 94, 60, 0.15), transparent 40%),
     radial-gradient(circle at bottom right, rgba(214, 167, 122, 0.15), transparent 40%);
+  --card-height: 100%;
+  --card-min-height: 280px;
 }
 
 * {
@@ -290,6 +292,102 @@ section {
 }
 
 /* ==========================================
+   UNIFIED CARD STYLES - ALL CARDS LOOK EVEN
+   ========================================== */
+.about-card,
+.project-card,
+.contact-card {
+  background: var(--color-bg-light);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 35px;
+  border-radius: var(--radius);
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  height: var(--card-height);
+  min-height: var(--card-min-height);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Card hover effect - consistent for all */
+.about-card:hover,
+.project-card:hover,
+.contact-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(139, 94, 60, 0.15);
+}
+
+/* Card accent line - consistent for all */
+.about-card::before,
+.project-card::before,
+.contact-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.about-card:hover::before,
+.project-card:hover::before,
+.contact-card:hover::before {
+  opacity: 1;
+}
+
+/* Card content spacing - consistent */
+.about-card h3,
+.project-content h3,
+.contact-card h3 {
+  margin-bottom: 20px;
+  color: var(--color-primary);
+  font-size: 24px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.about-card p,
+.about-card li,
+.project-content p,
+.contact-card p {
+  color: var(--color-text);
+  line-height: 30px;
+  flex: 1;
+}
+
+.about-card ul,
+.contact-card ul {
+  padding-left: 20px;
+  list-style: none;
+  flex: 1;
+}
+
+.about-card ul li,
+.contact-card ul li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 10px;
+  line-height: 30px;
+  color: var(--color-text);
+}
+
+.about-card ul li::before,
+.contact-card ul li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+/* ==========================================
    ABOUT SECTION
    ========================================== */
 .about-container {
@@ -299,51 +397,7 @@ section {
 }
 
 .about-card {
-  background: rgba(255, 250, 245, 0.88);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 35px;
-  border-radius: var(--radius);
-  transition: var(--transition);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-.about-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(139, 94, 60, 0.15);
-}
-
-.about-card h3 {
-  margin-bottom: 20px;
-  color: var(--color-primary);
-  font-size: 24px;
-  font-weight: 600;
-}
-
-.about-card p,
-.about-card li {
-  color: var(--color-text);
-  line-height: 30px;
-}
-
-.about-card ul {
-  padding-left: 20px;
-  list-style: none;
-}
-
-.about-card ul li {
-  position: relative;
-  padding-left: 25px;
-  margin-bottom: 10px;
-}
-
-.about-card ul li::before {
-  content: '▸';
-  position: absolute;
-  left: 0;
-  color: var(--color-primary);
-  font-weight: bold;
+  min-height: var(--card-min-height);
 }
 
 /* ==========================================
@@ -356,45 +410,31 @@ section {
 }
 
 .project-card {
-  background: var(--color-bg-light);
-  border-radius: var(--radius);
-  overflow: hidden;
-  position: relative;
-  transition: var(--transition);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 0;
+  min-height: var(--card-min-height);
+  display: flex;
+  flex-direction: column;
 }
 
 .project-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
   height: 5px;
-  background: var(--gradient-primary);
-}
-
-.project-card:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 25px 45px rgba(139, 94, 60, 0.15);
+  opacity: 1;
 }
 
 .project-content {
   padding: 35px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .project-content h3 {
   margin-bottom: 18px;
-  color: var(--color-dark);
-  font-size: 24px;
-  font-weight: 600;
 }
 
 .project-content p {
-  color: var(--color-text);
-  line-height: 30px;
   margin-bottom: 25px;
+  flex: 1;
 }
 
 .project-content a {
@@ -405,6 +445,9 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid rgba(139, 94, 60, 0.1);
 }
 
 .project-content a::after {
@@ -432,6 +475,18 @@ section {
 .timeline-item {
   margin-bottom: 50px;
   position: relative;
+  background: var(--color-bg-light);
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: var(--transition);
+  min-height: 180px;
+}
+
+.timeline-item:hover {
+  transform: translateX(10px);
+  box-shadow: 0 20px 40px rgba(139, 94, 60, 0.15);
 }
 
 .timeline-item::before {
@@ -442,7 +497,7 @@ section {
   border-radius: 50%;
   position: absolute;
   left: -46px;
-  top: 5px;
+  top: 35px;
   box-shadow: 0 0 15px rgba(139, 94, 60, 0.4);
 }
 
@@ -479,29 +534,15 @@ section {
 }
 
 .contact-card {
-  background: var(--color-bg-light);
-  padding: 40px;
-  border-radius: var(--radius);
-  transition: var(--transition);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-.contact-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(139, 94, 60, 0.12);
+  min-height: var(--card-min-height);
 }
 
 .contact-card h3 {
   margin-bottom: 30px;
-  color: var(--color-primary);
-  font-size: 26px;
-  font-weight: 600;
 }
 
 .contact-card p {
   margin-bottom: 18px;
-  color: var(--color-text);
   line-height: 30px;
 }
 
@@ -582,7 +623,7 @@ footer p {
   }
 }
 
-/* Scroll Animation Classes */
+/* Scroll Animation Classes - Consistent for all cards */
 .about-card,
 .project-card,
 .timeline-item,
@@ -600,26 +641,27 @@ footer p {
   transform: translateY(0);
 }
 
-/* Stagger children */
-.about-card:nth-child(2) {
+/* Stagger children for smooth reveal */
+.about-card:nth-child(2),
+.project-card:nth-child(2),
+.contact-card:nth-child(2) {
   transition-delay: 0.1s;
 }
-.about-card:nth-child(3) {
+
+.about-card:nth-child(3),
+.project-card:nth-child(3),
+.contact-card:nth-child(3) {
   transition-delay: 0.2s;
 }
 
-.project-card:nth-child(2) {
-  transition-delay: 0.1s;
-}
-.project-card:nth-child(3) {
-  transition-delay: 0.2s;
-}
 .project-card:nth-child(4) {
   transition-delay: 0.3s;
 }
+
 .project-card:nth-child(5) {
   transition-delay: 0.4s;
 }
+
 .project-card:nth-child(6) {
   transition-delay: 0.5s;
 }
@@ -636,6 +678,10 @@ footer p {
   .hero-image img {
     width: 320px;
     height: 320px;
+  }
+
+  :root {
+    --card-min-height: 260px;
   }
 }
 
@@ -684,6 +730,10 @@ footer p {
   section {
     padding: 80px 5%;
   }
+
+  :root {
+    --card-min-height: 240px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -714,6 +764,8 @@ footer p {
   .projects,
   .contact-grid {
     grid-template-columns: 1fr;
+    max-width: 600px;
+    margin: 0 auto;
   }
 
   .timeline {
@@ -724,6 +776,15 @@ footer p {
     left: -36px;
     width: 16px;
     height: 16px;
+    top: 30px;
+  }
+
+  .timeline-item {
+    padding: 25px;
+  }
+
+  :root {
+    --card-min-height: 220px;
   }
 }
 
@@ -794,6 +855,15 @@ footer p {
   .timeline-item h3 {
     font-size: 20px;
   }
+
+  .timeline-item {
+    padding: 20px;
+    min-height: 160px;
+  }
+
+  :root {
+    --card-min-height: 200px;
+  }
 }
 
 @media (max-width: 400px) {
@@ -814,5 +884,21 @@ footer p {
 
   .logo {
     font-size: 18px;
+  }
+
+  :root {
+    --card-min-height: 180px;
+  }
+
+  .about-card,
+  .project-content,
+  .contact-card {
+    padding: 20px;
+  }
+
+  .about-card h3,
+  .project-content h3,
+  .contact-card h3 {
+    font-size: 20px;
   }
 }
