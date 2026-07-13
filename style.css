@@ -21,7 +21,7 @@
   --gradient-hero: radial-gradient(circle at top left, rgba(139, 94, 60, 0.15), transparent 40%),
     radial-gradient(circle at bottom right, rgba(214, 167, 122, 0.15), transparent 40%);
   --card-height: 100%;
-  --card-min-height: 280px;
+  --card-min-height: 320px;
 }
 
 * {
@@ -401,12 +401,13 @@ section {
 }
 
 /* ==========================================
-   PROJECTS SECTION
+   PROJECTS SECTION - ALL CARDS IDENTICAL
    ========================================== */
 .projects {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 35px;
+  align-items: stretch;
 }
 
 .project-card {
@@ -414,27 +415,63 @@ section {
   min-height: var(--card-min-height);
   display: flex;
   flex-direction: column;
+  background: var(--color-bg-light);
+  border-radius: var(--radius);
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
 }
 
+/* Project card accent line - always visible */
 .project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 5px;
+  background: var(--gradient-primary);
   opacity: 1;
+  transition: var(--transition);
 }
 
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 45px rgba(139, 94, 60, 0.15);
+}
+
+.project-card:hover::before {
+  height: 6px;
+}
+
+/* Project content - identical spacing */
 .project-content {
   padding: 35px;
   display: flex;
   flex-direction: column;
   flex: 1;
+  height: 100%;
 }
 
 .project-content h3 {
   margin-bottom: 18px;
+  color: var(--color-primary);
+  font-size: 24px;
+  font-weight: 600;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
 }
 
 .project-content p {
+  color: var(--color-text);
+  line-height: 30px;
   margin-bottom: 25px;
   flex: 1;
+  font-size: 16px;
 }
 
 .project-content a {
@@ -448,6 +485,7 @@ section {
   margin-top: auto;
   padding-top: 15px;
   border-top: 1px solid rgba(139, 94, 60, 0.1);
+  font-size: 15px;
 }
 
 .project-content a::after {
@@ -681,7 +719,7 @@ footer p {
   }
 
   :root {
-    --card-min-height: 260px;
+    --card-min-height: 300px;
   }
 }
 
@@ -732,7 +770,7 @@ footer p {
   }
 
   :root {
-    --card-min-height: 240px;
+    --card-min-height: 280px;
   }
 }
 
@@ -784,7 +822,12 @@ footer p {
   }
 
   :root {
-    --card-min-height: 220px;
+    --card-min-height: 260px;
+  }
+
+  .project-content h3 {
+    min-height: 60px;
+    font-size: 22px;
   }
 }
 
@@ -862,7 +905,17 @@ footer p {
   }
 
   :root {
-    --card-min-height: 200px;
+    --card-min-height: 240px;
+  }
+
+  .project-content h3 {
+    min-height: 50px;
+    font-size: 20px;
+  }
+
+  .project-content p {
+    font-size: 15px;
+    line-height: 28px;
   }
 }
 
@@ -887,7 +940,7 @@ footer p {
   }
 
   :root {
-    --card-min-height: 180px;
+    --card-min-height: 220px;
   }
 
   .about-card,
@@ -900,5 +953,15 @@ footer p {
   .project-content h3,
   .contact-card h3 {
     font-size: 20px;
+  }
+
+  .project-content h3 {
+    min-height: 45px;
+    font-size: 18px;
+  }
+
+  .project-content p {
+    font-size: 14px;
+    line-height: 26px;
   }
 }
